@@ -68,7 +68,9 @@ $apiAccessToken = New-AemApiAccessToken @params
 
 # Call New-AemApiRequest function using defined parameters
 $sites = New-AemApiRequest @params -ApiAccessToken $apiAccessToken
+Write-Output "Begin params"
 Write-Output $params
+Write-Output "End params"
 Write-Output "Begin raw"
 Write-Output $sites
 Write-Output "End raw"
