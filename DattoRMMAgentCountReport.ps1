@@ -82,11 +82,11 @@ foreach ($site in $sites.sites) {
 
 #filter out sites we don't want
 $sitesData = $sitesData | Where-Object { 
-    $_.Name -ne "411" -or `
-        $_.Name -ne "Managed" -or `
-        $_.Name -ne "OnDemand" -or `
-        $_.Name -ne "Deleted Devices" -or `
-        $_.Name -ne "LITSLAB" -or `
+        $_.Name -ne "411" -and `
+        $_.Name -ne "Managed" -and `
+        $_.Name -ne "OnDemand" -and `
+        $_.Name -ne "Deleted Devices" -and `
+        $_.Name -ne "LITSLAB" -and `
         $_.Name -ne "z_Agent Removal Full"
 }
 
@@ -96,7 +96,7 @@ $policeSites = $sitesData | Where-Object { $_.Name -like "* - Police" }
 #Combine police site count into normal site count
 foreach ($policeSite in $policeSites) {
     $policeSiteNameWithoutSuffix = $policeSite.Name -replace ' - Police$', ''
-    $matchingSite = $sitesData | Where-Object { $_.Name -eq $policeSiteNameWithoutSuffix}
+    $matchingSite = $sitesData | Where-Object { $_.Name -eq $policeSiteNameWithoutSuffix }
     $matchingSite.DeviceCount = $matchingSite.DeviceCount + $policeSite.DeviceCount
 }
 
@@ -122,11 +122,13 @@ if (-not (Get-Module -Name Mailozaurr -ListAvailable)) {
         Write-Host "Mailozaurr module installed successfully."
         Import-Module -Name Mailozaurr -Force
         Write-Host "Mailozaurr module imported."
-    } else {
+    }
+    else {
         Write-Host "Failed to install Mailozaurr module. Please check for errors."
         exit
     }
-} else {
+}
+else {
     Write-Host "Mailozaurr module is already installed."
     Import-Module -Name Mailozaurr -Force
     Write-Host "Mailozaurr module imported."
@@ -137,7 +139,8 @@ Write-Host "Checking for updates to Mailozaurr module..."
 Update-Module -Name Mailozaurr
 if ($?) {
     Write-Host "Mailozaurr module is up to date."
-} else {
+}
+else {
     Write-Host "Failed to update Mailozaurr module. Please check for errors."
 }
 
