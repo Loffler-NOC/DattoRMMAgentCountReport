@@ -1,3 +1,6 @@
+# Specify security protocols
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 function New-AemApiAccessToken {
     param
     (
@@ -5,9 +8,6 @@ function New-AemApiAccessToken {
         [string]$apiKey,
         [string]$apiSecretKey
     )
-
-    # Specify security protocols
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]'Tls12'
 
     # Convert password to secure string
     $securePassword = ConvertTo-SecureString -String 'public' -AsPlainText -Force
