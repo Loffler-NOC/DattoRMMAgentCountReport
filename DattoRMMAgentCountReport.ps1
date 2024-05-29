@@ -140,7 +140,7 @@ $SMTPUsername = $env:SMTPEmailUsername
 $SMTPPassword = $env:SMTPEmailPassword
 [securestring]$secStringPassword = ConvertTo-SecureString $SMTPPassword -AsPlainText -Force
 [pscredential]$EmailCredential = New-Object System.Management.Automation.PSCredential ($SMTPUsername, $secStringPassword)
-$subject = "Sentinel One License Report"
+$subject = "Datto Agent Count Report"
 $body = @"
 Please find attached the Datto RMM Agent Report CSV file.
 If you have questions do not reply to this message, please send a message to the NOC in NOC-Toolkit or email $env:NOCEmail.
