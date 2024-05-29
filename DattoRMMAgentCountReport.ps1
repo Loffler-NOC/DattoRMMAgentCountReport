@@ -22,7 +22,7 @@ function New-AemApiAccessToken {
     }
 	
     # Request access token
-    try { (Invoke-WebRequest @params | ConvertFrom-Json).access_token }
+    try { (Invoke-WebRequest @params -UseBasicParsing | ConvertFrom-Json).access_token }
     catch { $_.Exception }
 }
 
@@ -50,7 +50,7 @@ function New-AemApiRequest {
     If ($apiRequestBody) { $params.Add('Body', $apiRequestBody) }
 
     # Make request
-    try { (Invoke-WebRequest @params).Content }
+    try { (Invoke-WebRequest @params -UseBasicParsing).Content }
     catch { $_.Exception }
 }
 
